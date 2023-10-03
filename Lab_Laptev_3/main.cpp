@@ -222,23 +222,19 @@ string Move_Fract(Fraction _Fract_1, Fraction _Fract_2)
     if (_result == "27062786216143660242.89") {_result = "27062786216143660242.8900";}
     return  _result;
 }
-string Sum(Fraction _Fract_1, Fraction _Fract_2, int _kom)
+void Sum(Fraction _Fract_1, Fraction _Fract_2, int _kom)
 {
-    string _result;
-    long double _Nom_1 = stod(_Fract_1.Conver_Total()+"."+_Fract_1.Conver_Remain())*_Fract_1.Return_Sign();
-    long double _Nom_2 = stod(_Fract_2.Conver_Total()+"."+_Fract_2.Conver_Remain())*_Fract_2.Return_Sign();
-    
+    long double _Nom_1 = stod(_Fract_1.Conver_Total()+_Fract_1.Conver_Remain())*_Fract_1.Return_Sign();
+    long double _Nom_2 = stod(_Fract_2.Conver_Total()+_Fract_2.Conver_Remain())*_Fract_2.Return_Sign();
+    double kf = pow(10, _Fract_1.Ret_Remain_Size());
     if (_kom == 1)
     {
-        _result = Corect(to_string(_Nom_1+_Nom_2), _Fract_1.Ret_Remain_Size());
+        cout << fixed << setprecision(_Fract_1.Ret_Remain_Size()) << (_Nom_1+_Nom_2)/kf << endl;
     }
     else
     {
-        _result = Corect(to_string(_Nom_1-_Nom_2), _Fract_1.Ret_Remain_Size());
+        cout << fixed << setprecision(_Fract_1.Ret_Remain_Size()) << (_Nom_1-_Nom_2)/kf << endl;
     }
-    if (_result == "7211212121.17") {_result = "7211212121.18";}
-    if (_result == "16520110013.44") {_result = "16520110013.45";}
-    return _result;
 }
 void Fraction_Displey(Fraction _Fract_1, Fraction _Fract_2)
 {
@@ -247,8 +243,10 @@ void Fraction_Displey(Fraction _Fract_1, Fraction _Fract_2)
     _Fract_1.String_Displey();
     cout << " Fraction2 ";
     _Fract_2.String_Displey();
-    cout << endl << "Fraction1+Fraction2 " <<  Sum(_Fract_1, _Fract_2, 1) << endl;
-    cout << "Fraction1-Fraction2 " << Sum(_Fract_1, _Fract_2, 2) << endl;
+    cout << endl << "Fraction1+Fraction2 ";
+    Sum(_Fract_1, _Fract_2, 1);
+    cout << "Fraction1-Fraction2 ";
+    Sum(_Fract_1, _Fract_2, 2);
     cout << "Fraction1*Fraction2 " << Move_Fract(_Fract_1, _Fract_2) << endl;
     cout << "Fraction1/Fraction2 " << Devide_Fract(_Fract_1, _Fract_2) << endl;
 }
@@ -304,3 +302,4 @@ int main() {
     Changes(_Fraction_1, _Fraction_2, _Massiv);
     return 0;
 }
+
