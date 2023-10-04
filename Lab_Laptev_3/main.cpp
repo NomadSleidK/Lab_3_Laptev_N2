@@ -165,10 +165,6 @@ string Devide_Fract(Fraction _Fract_1, Fraction _Fract_2)
     _res = stod(_del_1) / stod(_del_2);
     _res = round(_res*pow(10, k))/pow(10, k) * _Fract_1.Return_Sign() * _Fract_2.Return_Sign();
     _result = Corect(to_string(_res), k);
-    if(_result == "-0.318534"){_result = "-0.318533";}
-    if(_result == "1.4971"){_result = "1.4970";}
-    if(_result == "-0.719954"){_result = "-0.719953";}
-    if(_result == "-1.650719"){_result = "-1.650718";}
     return  _result;
 }
 string Move_Fract(Fraction _Fract_1, Fraction _Fract_2)
@@ -211,15 +207,15 @@ string Move_Fract(Fraction _Fract_1, Fraction _Fract_2)
     {
         _result.erase(_result.begin()+_result.size() -1);
     }
-    if(_result[_result.size() -2] == '.' || _result[_result.size() -4] == '.')
+    if (k < 5)
     {
+        while(_result[_result.size() -1 -k] != '.'){
+                _result += '0';
+        }
+    }
+    if(_result[_result.size() -2] == '.'){
         _result += '0';
     }
-    else if(_result[_result.size() -1] == '.'){
-        _result += '0';
-        _result += '0';
-    }
-    if (_result == "27062786216143660242.89") {_result = "27062786216143660242.8900";}
     return  _result;
 }
 void Sum(Fraction _Fract_1, Fraction _Fract_2, int _kom)
